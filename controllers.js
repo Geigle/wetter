@@ -19,10 +19,11 @@ weatherApp.controller('forecastController', ['$scope', '$routeParams', 'cityServ
     $scope.city = cityService.city;
     
     $scope.days = $routeParams.days || '2';
+    console.log($scope.days);
 
     $scope.weatherResult = weatherService.GetWeather($scope.city, $scope.days);
 
-    console.log($scope.weatherResult);
+    //console.log('Forecast days: ' + $scope.weatherResult.forecast.forecastday.length);
     
     $scope.convertToFahrenheit = function(degK) {
         
