@@ -4,12 +4,25 @@
 
 Forecast for {{ city }}
 <hr />
-Days: <a href="#/forecast/1" ng-class="{ 'bg-primary': days === '1' }">1</a> | <a href="#/forecast/2" ng-class="{ 'bg-primary': days === '2' }">2</a> | <a href="#/forecast/3" ng-class="{ 'bg-primary': days === '3' }">3</a>
+<div class="container">
+    <div class="row">
+        <div class="col-md-auto">
+            Days: <a href="#/forecast/1" ng-class="{ 'bg-primary': days === '1' }">1</a> | <a href="#/forecast/2" ng-class="{ 'bg-primary': days === '2' }">2</a> | <a href="#/forecast/3" ng-class="{ 'bg-primary': days === '3' }">3</a>
+        </div>
+        <div class="col">
+            <div class="btn-group">
+                <label ng-class="tempUnit.classF()" ng-disabled="tempUnit.getF()" ng-click="tempUnit.setF()">℉</label>
+                <label ng-class="tempUnit.classC()" ng-disabled="tempUnit.getC()" ng-click="tempUnit.setC()">℃</label>
+            </div>
+        </div>
+    </div>
+</div>
 <hr />
 <div ng-repeat="w in weatherResult.forecast.forecastday">
     <div class="row">
         <div class="col-md-12">
-            <weather-result forecast-object="w" convert-to-date="convertToDate(dt)" date-format="MMM, d, y"></weather-result>
+            <weather-result forecast-object="w" convert-to-date="convertToDate(dt)" date-format="MMM, d, y" unit="tempUnit"></weather-result>
         </div>
     </div>
 </div>
+Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>

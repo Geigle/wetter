@@ -5,6 +5,7 @@ weatherApp.directive("weatherResult", function() {
         replace: true,
         scope: {
             forecastObject: "=",
+            unit: "=",
             convertToDate: "&",
             dateFormat: "@"
         }

@@ -1,8 +1,24 @@
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <h3 class="panel-title">{{ convertToDate({ dt: forecastObject.date_epoch }) | date: dateFormat }}</h3>
+<div class="container">
+    <div class="row">
+        <div class="col"><h3>{{ convertToDate({ dt: forecastObject.date_epoch }) | date: dateFormat }}</h3></div>
     </div>
-    <div class="panel-body">
-        Daytime temperature: {{ forecastObject.day.avgtemp_f }}
+    <div class="row">
+        <div class="col"><img ng-src="{{ forecastObject.day.condition.icon }}"></div>
+        <div class="col">{{ forecastObject.day.condition.text }}</div>
+        <div class="col">UV Index: {{ forecastObject.day.uv }}</div>
+        <div class="col" ng-show="unit.getF()"> High: {{ forecastObject.day.maxtemp_f }}℉</div>
+        <div class="col" ng-show="unit.getF()"> Low: {{ forecastObject.day.mintemp_f }}℉</div>
+        <div class="col" ng-show="unit.getC()"> High: {{ forecastObject.day.maxtemp_c }}℃</div>
+        <div class="col" ng-show="unit.getC()"> Low: {{ forecastObject.day.mintemp_c }}℃</div>
     </div>
+    <div class="row">
+        <div class="col" ng-show="unit.getF()">Visibility: {{ forecastObject.day.avgvis_miles }} Miles</div>
+        <div class="col" ng-show="unit.getC()">Visibility: {{ forecastObject.day.avgvis_km }} KM</div>
+        <div class="col">Humidity: {{ forecastObject.day.avghumidity }}%</div>
+        <div class="col" ng-show="unit.getF()">Precipitation: {{ forecastObject.day.totalprecip_in }} Inches</div>
+        <div class="col" ng-show="unit.getC()">Precipitation: {{ forecastObject.day.totalprecip_mm }} MM</div>
+        <div class="col"></div>
+        <div class="col"></div>
+    </div>
+    <hr>
 </div>

@@ -14,4 +14,5 @@ weatherApp.service('weatherService', ['$resource',  function($resource) {
         console.log(city + ', ' + daycount + ' days');
         return weatherAPI.get({city: city, days: daycount});
     }   
+
 }]);
