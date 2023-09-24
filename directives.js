@@ -4,6 +4,7 @@ weatherApp.directive("weatherResult", function() {
         templateUrl: 'directives/weatherResult.html',
         replace: true,
         scope: {
+            idNum: "=",
             forecastObject: "=",
             unit: "=",
             convertToDate: "&",

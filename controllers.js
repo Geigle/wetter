@@ -21,6 +21,8 @@ weatherApp.controller('forecastController', ['$scope', '$routeParams', 'cityServ
 
     $scope.weatherResult = weatherService.GetWeather($scope.city, $scope.days);
 
+    $scope.WeatherResultId = 0;
+
     $scope.convertToFahrenheit = function(degK) {
         
         return Math.round((1.8 * (degK - 273)) + 32);

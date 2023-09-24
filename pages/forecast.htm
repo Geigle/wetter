@@ -1,28 +1,62 @@
-<p>
-    <a href="#/">Back to Search</a>
-</p>
+<div class="text-dark">
+    <p>
+        <a href="#/">Back to Search</a>
+    </p>
 
-Forecast for {{ city }}
-<hr />
-<div class="container">
-    <div class="row">
-        <div class="col-md-auto">
-            Days: <a href="#/forecast/1" ng-class="{ 'bg-primary': days === '1' }">1</a> | <a href="#/forecast/2" ng-class="{ 'bg-primary': days === '2' }">2</a> | <a href="#/forecast/3" ng-class="{ 'bg-primary': days === '3' }">3</a>
-        </div>
-        <div class="col">
-            <div class="btn-group">
-                <label ng-class="tempUnit.classF()" ng-disabled="tempUnit.getF()" ng-click="tempUnit.setF()">℉</label>
-                <label ng-class="tempUnit.classC()" ng-disabled="tempUnit.getC()" ng-click="tempUnit.setC()">℃</label>
+    Forecast for {{ city }}
+    <hr />
+    <div class="container card text-light">
+        <div class="row">
+            <div class="col-md-auto">
+                Days: <a href="#/forecast/1" ng-class="{ 'bg-primary': days === '1' }">1</a> | <a href="#/forecast/2" ng-class="{ 'bg-primary': days === '2' }">2</a> | <a href="#/forecast/3" ng-class="{ 'bg-primary': days === '3' }">3</a>
+            </div>
+            <div class="col">
+                <div class="btn-group">
+                    <label ng-class="tempUnit.classF()" ng-disabled="tempUnit.getF()" ng-click="tempUnit.setF()">℉</label>
+                    <label ng-class="tempUnit.classC()" ng-disabled="tempUnit.getC()" ng-click="tempUnit.setC()">℃</label>
+                </div>
             </div>
         </div>
     </div>
+    <hr />
+    <div ng-repeat="w in weatherResult.forecast.forecastday">
+        <div class="row card text-light">
+            <div class="col-md-12">
+                <weather-result id-num="weatherResultId = weatherResultId + 1" forecast-object="w" convert-to-date="convertToDate(dt)" date-format="MMM, d, y" unit="tempUnit"></weather-result>
+            </div>
+        </div>
+        <hr>
+    </div>
+    Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
+
+
 </div>
-<hr />
-<div ng-repeat="w in weatherResult.forecast.forecastday">
-    <div class="row">
-        <div class="col-md-12">
-            <weather-result forecast-object="w" convert-to-date="convertToDate(dt)" date-format="MMM, d, y" unit="tempUnit"></weather-result>
+<footer class=" navbar-light bg-dark text-light border-top pt-4">
+    <div class="container">
+        <div class="row">
+            <div class="col-12 col-md-3 mb-3">
+                <h5>GAGEGEIGLE.NET</h5>
+                Gage Geigle's personal blog and website.
+            </div>
+            <div class="col-12 col-md-3 mb-3">
+                <h5>Social</h5>
+                <ul class="list-unstyled list-inline">
+                    <li class="list-inline-item"><a href="https://github.com/Geigle" target="_blank" rel="noopener noreferrer" title="GitHub" class="fab fa-github fa-2x"></a></li>
+                    <li class="list-inline-item"><a href="https://linkedin.com/in/gage-geigle-6b234b95" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="fab fa-linkedin fa-2x"></a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-3 mb-3">
+                <h5>Site</h5>
+                <ul class="list-unstyled">
+                    <li><a href="http://localhost:1313/about/"><i class="fas fa-info-circle"></i> About</a></li>
+                    <li><a href="http://localhost:1313/categories/"><i class="fas fa-folder"></i> Categories</a></li>
+                    <li><a href="http://localhost:1313/tags/"><i class="fas fa-tags"></i> Tags</a></li>
+                </ul>
+            </div>
+            <div class="col-12 col-md-3 mb-3">
+                © 2023 Gage Geigle<br>
+                Theme by <a href="https://www.spech.de" target="_blank" rel="noopener noreferrer">Sebastian Pech</a>.
+            </div>
         </div>
     </div>
-</div>
-Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
+</footer>
