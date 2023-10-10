@@ -4,11 +4,37 @@ weatherApp.directive("weatherResult", function() {
         templateUrl: 'directives/weatherResult.html',
         replace: true,
         scope: {
-            idNum: "=",
             forecastObject: "=",
             unit: "=",
             convertToDate: "&",
-            dateFormat: "@"
+            dateFormat: "@",
+            fcObjId: "@"
+            //idNum: "@"
+            //AstroMgr: "="
+        }
+    }
+})
+
+weatherApp.directive("customFooter", function() {
+    return {
+        templateUrl: 'directives/customFooter.html',
+        replace: true
+    }
+})
+
+weatherApp.directive("astroSection", function() {
+    return {
+        restrict: 'E',
+        templateUrl: 'directives/astroSection.html',
+        replace: true,
+        scope: {
+            sr: "@",
+            ss: "@",
+            mr: "@",
+            ms: "@",
+            mp: "@",
+            mi: "@",
+            astroCtlr: '=',
         }
     }
 })

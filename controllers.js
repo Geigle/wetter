@@ -35,6 +35,18 @@ weatherApp.controller('forecastController', ['$scope', '$routeParams', 'cityServ
         
     };
 
+    $scope.astroCtl = {
+        visible: false,
+        getVisible: function() { return visible; },
+        show: function() { visible = true; console.log(`Astro Visible: ${visible}`); },
+        hide: function() { visible = false; console.log(`Astro Visible: ${visible}`); },
+        toggle: function() { if(visible) { hide(); } else { show(); } console.log(`Astro Visible: ${visible}`); }
+    }
+
+    $scope.dayId = {
+        value: 0
+    }
+
     $scope.tempUnit = { 
         F: true, 
         C: false, 

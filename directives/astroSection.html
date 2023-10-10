@@ -1,0 +1,22 @@
+<div class="container">
+    <div class="row">
+        <div class=col"><h4>Solar & Lunar Cycle</h4></div>
+        <div class="col"> <div class="btn" ng-click="AstroCtlr.toggle()">V</div> </div>
+    </div>
+    <div class="container" ng-show="AstroCtlr.visible">
+        <div class="row">
+            <div class="col">Sunrise: {{ sr }}</div>
+            <div class="col">Sunset: {{ ss }}</div>
+        </div>
+        <hr>
+        <div class="row">
+            <div class="col">Moonrise: {{ mr }}</div>
+            <div class="col">Moonset: {{ ms }}</div>
+        </div>
+        <div class="row">
+            <div class="col">Phase: {{ mp }}</div>
+            <div class="col">Illumination: {{ mi }}%</div>
+        </div>
+
+    </div>
+</div>

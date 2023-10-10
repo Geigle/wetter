@@ -1,4 +1,4 @@
-<div class="text-dark">
+<div class="text-dark overflow-dark">
     <p>
         <a href="#/">Back to Search</a>
     </p>
@@ -22,41 +22,12 @@
     <div ng-repeat="w in weatherResult.forecast.forecastday">
         <div class="row card text-light">
             <div class="col-md-12">
-                <weather-result id-num="weatherResultId = weatherResultId + 1" forecast-object="w" convert-to-date="convertToDate(dt)" date-format="MMM, d, y" unit="tempUnit"></weather-result>
+                <weather-result forecast-object="w" convert-to-date="convertToDate(dt)" date-format="MMM, d, y" unit="tempUnit" fc-obj-id="{{dayId.value = $index}}"></weather-result>
             </div>
         </div>
-        <hr>
+        <br>
     </div>
     Powered by <a href="https://www.weatherapi.com/" title="Free Weather API">WeatherAPI.com</a>
-
-
+    <div style="height:130px"></div>
 </div>
-<footer class=" navbar-light bg-dark text-light border-top pt-4">
-    <div class="container">
-        <div class="row">
-            <div class="col-12 col-md-3 mb-3">
-                <h5>GAGEGEIGLE.NET</h5>
-                Gage Geigle's personal blog and website.
-            </div>
-            <div class="col-12 col-md-3 mb-3">
-                <h5>Social</h5>
-                <ul class="list-unstyled list-inline">
-                    <li class="list-inline-item"><a href="https://github.com/Geigle" target="_blank" rel="noopener noreferrer" title="GitHub" class="fab fa-github fa-2x"></a></li>
-                    <li class="list-inline-item"><a href="https://linkedin.com/in/gage-geigle-6b234b95" target="_blank" rel="noopener noreferrer" title="LinkedIn" class="fab fa-linkedin fa-2x"></a></li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-3 mb-3">
-                <h5>Site</h5>
-                <ul class="list-unstyled">
-                    <li><a href="http://localhost:1313/about/"><i class="fas fa-info-circle"></i> About</a></li>
-                    <li><a href="http://localhost:1313/categories/"><i class="fas fa-folder"></i> Categories</a></li>
-                    <li><a href="http://localhost:1313/tags/"><i class="fas fa-tags"></i> Tags</a></li>
-                </ul>
-            </div>
-            <div class="col-12 col-md-3 mb-3">
-                © 2023 Gage Geigle<br>
-                Theme by <a href="https://www.spech.de" target="_blank" rel="noopener noreferrer">Sebastian Pech</a>.
-            </div>
-        </div>
-    </div>
-</footer>
+<custom-footer></custom-footer>

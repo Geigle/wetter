@@ -24,6 +24,28 @@
 
         <div class="col"></div>
     </div>
+    <div class="accordion" id="accordionAstro{{fcObjId}}">
+        <div class="accordion-item text-dark">
+            <h2 class="accordion-header">
+                <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{fcObjId}}" aria-expanded="true" aria-controls="collapse{{fcObjId}}">
+                    Solar & Lunar Cycle
+                </button>
+            </h2>
+            <div id="collapse{{fcObjId}}" class="accordion-collapse collapse" data-bs-parent="accordionAstro{{fcObjId}}">
+                <div class="accordion-body text-dark">
+                    <div class="row">
+                        <div class="col">Sunrise: {{ forecastObject.astro.sunrise }}</div>
+                        <div class="col">Sunset: {{ forecastObject.astro.sunset }}</div>
+                        <div class="col"></div>
+                    </div>
+                    <div class="row">
+                        <div class="col">Moonrise: {{ forecastObject.astro.moonrise }}</div>
+                        <div class="col">Moonset: {{ forecastObject.astro.moonset }}</div>
+                        <div class="col">Moon Phase: {{ forecastObject.astro.moon_phase }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
     <br>
-    <!-- New directive: accordion for solar-lunar-cycle info.  See "junk/scraps.txt". -->
 </div>
