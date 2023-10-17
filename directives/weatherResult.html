@@ -1,10 +1,11 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-1"><img ng-src="{{ forecastObject.day.condition.icon }}"></div>
-        <div class="col"><h3>{{ convertToDate({ dt: forecastObject.date_epoch }) | date: dateFormat }}</h3></div>
+        <h3 class="col">{{ convertToDate({ dt: forecastObject.date_epoch }) | date: dateFormat }}</h3>
+        <h4 class="col col-3"><img ng-src="{{ forecastObject.day.condition.icon }}">{{ forecastObject.day.condition.text }}</h4>
+        <div class="col"></div>
+        <div class="col"></div>
     </div>
     <div class="row">
-        <div class="col">{{ forecastObject.day.condition.text }}</div>
         <div class="col">UV Index: {{ forecastObject.day.uv }}</div>
 
         <div class="col" ng-show="unit.getF()"> High: {{ forecastObject.day.maxtemp_f }}℉</div>
@@ -21,18 +22,150 @@
 
         <div class="col" ng-show="unit.getF()">Precipitation: {{ forecastObject.day.totalprecip_in }} Inches</div>
         <div class="col" ng-show="unit.getC()">Precipitation: {{ forecastObject.day.totalprecip_mm }} MM</div>
-
-        <div class="col"></div>
     </div>
-    <div class="accordion" id="accordionAstro{{fcObjId}}">
-        <div class="accordion-item text-dark">
+    <div class="accordion" id="accordionBonus{{fcObjId}}">
+        <div class="accordion-item">
             <h2 class="accordion-header">
-                <button class="accordion-button text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{fcObjId}}" aria-expanded="true" aria-controls="collapse{{fcObjId}}">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseHF{{fcObjId}}" aria-expanded="true" aria-controls="collapseHF{{fcObjId}}">
+                    Hourly Forecast
+                </button>
+            </h2>
+            <div id="collapseHF{{fcObjId}}" class="accordion-collapse collapse" data-bs-parent="accordionBonus{{fcObjId}}">
+                <div class="accordion-body">
+                    <div class="sticky-top bg-dark-subtle rounded-bottom px-1 d-block d-lg-none">
+                        <div class="row">
+                            <b class="col border-end">Time</b>
+                            <b class="col border-end"><em>Condition</em></b>
+                            <b class="col">Temp (Feel)</b>
+                        </div>
+                        <div class="row">
+                            <b class="col col-7 border-end"><em>Wind, Avg-Gust</em></b>
+                            <b class="col">Vis</b>
+                        </div>
+                        <div class="row">
+                            <b class="col border-end">Rain</b>
+                            <b class="col border-end"><em>Bar. P</em></b>
+                            <b class="col">UV Idx</b>
+                        </div>
+                        <div class="row">
+                            <b class="col border-end"><em>Hum</em></b>
+                            <b class="col">Dew Pt</b>
+                        </div>
+                    </div>
+                    <div class="sticky-top bg-dark-subtle rounded-bottom px-1 d-none d-lg-block d-xxl-none">
+                        <div class="row">
+                            <b class="col col-1">Time</b>
+                            <b class="col col-3">Condition</b>
+                            <b class="col col-2">Temp (Feel)</b>
+                            <b class="col col-4 p-0">Wind, Avg-Gust</b>
+                            <b class="col col-2">Vis</b>
+                        </div>
+                        <div class="row">
+                            <b class="col col-1">*</b>
+                            <b class="col">Rain</b>
+                            <b class="col col-2">Bar. P</b>
+                            <b class="col">UV Idx</b>
+                            <b class="col">Hum</b>
+                            <b class="col">Dew Pt</b>
+                        </div>
+                    </div>
+                    <div class="sticky-top bg-dark-subtle rounded-bottom px-1 d-none d-xxl-block">
+                        <div class="row">
+                            <b class="col col-1">Time</b>
+                            <b class="col">Condition</b>
+                            <b class="col">Temp (Feel)</b>
+                            <b class="col">Wind, Avg-Gust</b>
+                            <b class="col">Vis</b>
+                            <b class="col">Rain</b>
+                            <b class="col">Bar. P</b>
+                            <b class="col">UV Idx</b>
+                            <b class="col">Hum</b>
+                            <b class="col">Dew Pt</b>
+                        </div>
+                    </div>
+                    <hr>
+                    <div ng-repeat="h in forecastObject.hour">
+                        <div class="px-1 d-block d-lg-none">
+                            <div class="row">
+                                <b class="col border-end">{{ convertToDate({dt: h.time_epoch}) | date: "HH:mm" }}</b>
+                                <em class="col border-end"><img ng-src="{{ h.condition.icon }}" style="height:28px">{{ h.condition.text }}</em>
+                                <div class="col" ng-show="unit.getF()">{{ h.temp_f }}℉ ({{ h.feelslike_f }}℉)</div>
+                                <div class="col" ng-show="unit.getC()">{{ h.temp_c }}℃ ({{ h.feelslike_c }}℃)</div>
+                            </div>
+                            <div class="row">
+                                <em class="col col-7 border-end" ng-show="unit.getF()">{{ h.wind_dir }}({{ h.wind_degree }}°) {{ h.wind_mph }}-{{ h.gust_mph }} MPH</em>
+                                <em class="col col-7 border-end" ng-show="unit.getC()">{{ h.wind_dir }}({{ h.wind_degree }}°) {{ h.wind_kph }}-{{ h.gust_kph }} KPH</em>
+                                <div class="col" ng-show="unit.getF()">{{ h.vis_miles }} Miles</div>
+                                <div class="col" ng-show="unit.getC()">{{ h.vis_km }} Km</div>
+                            </div>
+                            <div class="row">
+                                <div class="col border-end" ng-show="unit.getF()">{{ h.chance_of_rain }}% / {{ h.precip_in }} In</div>
+                                <div class="col border-end" ng-show="unit.getC()">{{ h.chance_of_rain }}% / {{ h.precip_mm }} Mm</div>
+                                <em class="col border-end" ng-show="unit.getF()">{{ h.pressure_in }} In</em>
+                                <em class="col border-end" ng-show="unit.getC()">{{ h.pressure_mb }} Mb</em>
+                                <div class="col">{{ h.uv }}</div>
+                            </div>
+                            <div class="row">
+                                <em class="col border-end">{{ h.humidity }}%</em>
+                                <div class="col" ng-show="unit.getF()">{{ h.dewpoint_f }}℉</div>
+                                <div class="col" ng-show="unit.getC()">{{ h.dewpoint_c }}℃</div>
+                            </div>
+                        </div>
+                        <div class="px-1 d-none d-lg-block d-xxl-none">
+                            <div class="row">
+                                <b class="col col-1">{{ convertToDate({dt: h.time_epoch}) | date: "HH:mm" }}</b>
+                                <div class="col col-3"><img ng-src="{{ h.condition.icon }}" style="height:28px">{{ h.condition.text }}</div>
+                                <div class="col col-2" ng-show="unit.getF()">{{ h.temp_f }}℉ ({{ h.feelslike_f }}℉)</div>
+                                <div class="col col-2" ng-show="unit.getC()">{{ h.temp_c }}℃ ({{ h.feelslike_c }}℃)</div>
+                                <div class="col col-4" ng-show="unit.getF()">{{ h.wind_dir }}({{ h.wind_degree }}°) {{ h.wind_mph }}-{{ h.gust_mph }} MPH</div>
+                                <div class="col col-4" ng-show="unit.getC()">{{ h.wind_dir }}({{ h.wind_degree }}°) {{ h.wind_kph }}-{{ h.gust_kph }} KPH</div>
+                                <div class="col col-2" ng-show="unit.getF()">{{ h.vis_miles }} Miles</div>
+                                <div class="col col-2" ng-show="unit.getC()">{{ h.vis_km }} Km</div>
+                            </div>
+                            <div class="row ">
+                                <div class="col col-1">*</div>
+                                <div class="col" ng-show="unit.getF()">{{ h.chance_of_rain }}% / {{ h.precip_in }} In</div>
+                                <div class="col" ng-show="unit.getC()">{{ h.chance_of_rain }}% / {{ h.precip_mm }} Mm</div>
+                                <div class="col col-2" ng-show="unit.getF()">{{ h.pressure_in }} In</div>
+                                <div class="col col-2" ng-show="unit.getC()">{{ h.pressure_mb }} Mb</div>
+                                <div class="col">{{ h.uv }}</div>
+                                <div class="col">{{ h.humidity }}%</div>
+                                <div class="col" ng-show="unit.getF()">{{ h.dewpoint_f }}℉</div>
+                                <div class="col" ng-show="unit.getC()">{{ h.dewpoint_c }}℃</div>
+                            </div>
+                        </div>
+                        <div class="px-1 d-none d-xxl-block">
+                            <div class="row ">
+                                <b class="col col-1" >{{ convertToDate({dt: h.time_epoch}) | date: "HH:mm" }}</b>
+                                <div class="col" ><img ng-src="{{ h.condition.icon }}" style="height:28px">{{ h.condition.text }}</div>
+                                <div class="col"  ng-show="unit.getF()">{{ h.temp_f }}℉ ({{ h.feelslike_f }}℉)</div>
+                                <div class="col"  ng-show="unit.getC()">{{ h.temp_c }}℃ ({{ h.feelslike_c }}℃)</div>
+                                <div class="col"  ng-show="unit.getF()">{{ h.wind_dir }}({{ h.wind_degree }}°) {{ h.wind_mph }}-{{ h.gust_mph }} MPH</div>
+                                <div class="col"  ng-show="unit.getC()">{{ h.wind_dir }}({{ h.wind_degree }}°) {{ h.wind_kph }}-{{ h.gust_kph }} KPH</div>
+                                <div class="col"  ng-show="unit.getF()">{{ h.vis_miles }} Mi</div>
+                                <div class="col"  ng-show="unit.getC()">{{ h.vis_km }} Km</div>
+                                <div class="col"  ng-show="unit.getF()">{{ h.chance_of_rain }}% / {{ h.precip_in }} In</div>
+                                <div class="col"  ng-show="unit.getC()">{{ h.chance_of_rain }}% / {{ h.precip_mm }} Mm</div>
+                                <div class="col"  ng-show="unit.getF()">{{ h.pressure_in }} In</div>
+                                <div class="col"  ng-show="unit.getC()">{{ h.pressure_mb }} Mb</div>
+                                <div class="col" >{{ h.uv }}</div>
+                                <div class="col" >{{ h.humidity }}%</div>
+                                <div class="col"  ng-show="unit.getF()">{{ h.dewpoint_f }}℉</div>
+                                <div class="col"  ng-show="unit.getC()">{{ h.dewpoint_c }}℃</div>
+                            </div>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <h2 class="accordion-header">
+                <button class="accordion-button  collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSLC{{fcObjId}}" aria-expanded="true" aria-controls="collapseSLC{{fcObjId}}">
                     Solar & Lunar Cycle
                 </button>
             </h2>
-            <div id="collapse{{fcObjId}}" class="accordion-collapse collapse" data-bs-parent="accordionAstro{{fcObjId}}">
-                <div class="accordion-body text-dark">
+            <div id="collapseSLC{{fcObjId}}" class="accordion-collapse collapse" data-bs-parent="accordionBonus{{fcObjId}}">
+                <div class="accordion-body ">
                     <div class="row">
                         <div class="col">Sunrise: {{ forecastObject.astro.sunrise }}</div>
                         <div class="col">Sunset: {{ forecastObject.astro.sunset }}</div>
